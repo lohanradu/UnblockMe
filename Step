@@ -1,0 +1,11 @@
+public class Step {
+	int id;
+	int steps;
+
+	public Step(int id, int steps) {
+		super();
+		this.id = id;
+		this.steps = steps;
+	}
+
+}
