@@ -1,0 +1,57 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class InputReader {
+
+	Board board;
+	List<Block> blocks = new ArrayList<>();
+	List<Step> steps = new ArrayList<>();
+
+	public void readInput() throws FileNotFoundException {
+		try (Scanner scanner = new Scanner(new File("in.txt"))) {
+			board = new Board(scanner.nextInt(), scanner.nextInt());
+			initBlocks(scanner);
+			initSteps(scanner);
+		}
+	}
+
+	private void initSteps(Scanner scanner) {
+		int noOfSteps = scanner.nextInt();
+		while (noOfSteps > 0) {
+			steps.add(new Step(scanner.nextInt(), scanner.nextInt()));
+			noOfSteps--;
+		}
+	}
+
+	private void initBlocks(Scanner scanner) {
+		int numberOfBlocks = scanner.nextInt();
+		for (int i = 0; i < numberOfBlocks; i++) {
+			blocks.add(readBlock(scanner));
+		}
+		printBlocks(blocks);
+	}
+
+	/*
+	 * public List<Block> readBlocks() throws FileNotFoundException {
+	 * List<Block> blocks = new ArrayList<Block>(); try (Scanner scanner = new
+	 * Scanner(new File("in.txt"))) { while (scanner.hasNext()) {
+	 * blocks.add(readBlockLine(scanner)); } } printBlocks(blocks); return
+	 * blocks; }
+	 */
+
+	private void printBlocks(List<Block> blocks) {
+		System.out.println("Input blocks:");
+		for (Block block : blocks) {
+			System.out.println(block);
+		}
+
+	}
+
+	private Block readBlock(Scanner scanner) {
+		return new Block(scanner.nextInt(), scanner.next(), scanner.nextInt(),
+				scanner.nextInt(), scanner.nextInt());
+	}
+}
